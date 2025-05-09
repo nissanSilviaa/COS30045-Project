@@ -3,23 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>TV Energy Consumption Histogram</title>
-
+  <title>Police Enforcement Dashboard</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
   <header>
-    <h1>Police Enforcement</h1>
+    <div class="header-inner">
+      <div class="logo">
+        <!-- Replace with the real Australian Government logo file -->
+        <img src="images/logo.png" alt="Australian Government">
+      </div>
+      <h1>Police Enforcement</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#" data-target="home" class="active">Home</a></li>
+        <li><a href="#" data-target="random-breath-tests">Random breath tests</a></li>
+        <li><a href="#" data-target="drug-tests">Drug tests</a></li>
+        <li><a href="#" data-target="mobile-phone">Mobile phone</a></li>
+        <li><a href="#" data-target="speeding">Speeding</a></li>
+        <li><a href="#" data-target="seatbelts">Non-wearing seatbelts</a></li>
+        <li><a href="#" data-target="unlicensed-driving">Unlicensed driving</a></li>
+      </ul>
+    </nav>
   </header>
+
   <main>
+    <section id="home" class="tab-content active">
+      <h2>Annual Enforcement series</h2>
+      <ul>
+        <li><strong>Random breath tests</strong> conducted, share of positive random breath test results.</li>
+        <li><strong>Drug tests</strong> conducted and share of positive roadside drug test results.</li>
+        <li><strong>Mobile phone fines</strong> issued, including camera detection.</li>
+        <li><strong>Speeding fines</strong> issued, including camera detection.</li>
+        <li><strong>Seatbelt fines</strong> issued by police and camera detection.</li>
+        <li><strong>Unlicensed driving</strong> issued by police. <em>*New for 2023 data*</em></li>
+      </ul>
+      <p class="note">
+        Arrests and charges have been collected from data reported in 2023, but may not be<br>
+        applicable for all states and territories. Data is subject to revision.
+      </p>
+      <h3>Notes</h3>
+      <ul>
+        <li>Please refer to the Road User Placemats for Rules in Australia from the <a href="#">Office of Road Safety website</a>.</li>
+        <li>Annual drivers licence data is sourced from the Australian Infrastructure and Transport Statistics Yearbook.</li>
+        <li>The Department of Infrastructure, Transport, Regional Development, Communications and the Arts gratefully acknowledges the provision of data from the following agencies:</li>
+        <li>NSW Police Force, Transport for NSW, Revenue NSW</li>
+        <li>Victoria Police, Department of Transport, Victoria</li>
+        <li>… etc.</li>
+      </ul>
+    </section>
 
+    <section id="random-breath-tests" class="tab-content">
+      <h2>Random Breath Tests</h2>
+      <p>Placeholder for interactive chart of random breath test counts and positivity rates over time.</p>
+      <div id="chart-random-breath" class="chart-container"></div>
+    </section>
 
+    <section id="drug-tests" class="tab-content">
+      <h2>Drug Tests</h2>
+      <p>Placeholder for roadside drug tests conducted and share of positives.</p>
+      <div id="chart-drugs" class="chart-container"></div>
+    </section>
+
+    <section id="mobile-phone" class="tab-content">
+      <h2>Mobile Phone Offences</h2>
+      <p>Placeholder for mobile phone fines issued (including camera detection).</p>
+      <div id="chart-mobile" class="chart-container"></div>
+    </section>
+
+    <section id="speeding" class="tab-content">
+      <h2>Speeding Fines</h2>
+      <p>Placeholder for speeding fines issued (including camera detection).</p>
+      <div id="chart-speeding" class="chart-container"></div>
+    </section>
+
+    <section id="seatbelts" class="tab-content">
+      <h2>Seatbelt Offences</h2>
+      <p>Placeholder for seatbelt fines issued by police and cameras.</p>
+      <div id="chart-seatbelts" class="chart-container"></div>
+    </section>
+
+    <section id="unlicensed-driving" class="tab-content">
+      <h2>Unlicensed Driving</h2>
+      <p>Placeholder for unlicensed driving offences issued by police.</p>
+      <div id="chart-unlicensed" class="chart-container"></div>
+    </section>
   </main>
 
   <footer>
-    <p>© 2025 Police Enforcement Data</p>
+    <p>© 2025 Australian Government Department of Infrastructure, Transport, Regional Development, Communications and the Arts</p>
   </footer>
+
+  <script src="js/scripts.js" defer></script>
 </body>
 </html>
