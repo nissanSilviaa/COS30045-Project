@@ -1,10 +1,12 @@
 /* RESET & BASE */
-* {
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
   }
   body {
+    display: flex;
+    flex-direction: column;
     font-family: "Segoe UI", Arial, sans-serif;
     background: #f4f6f8;
     color: #333;
@@ -14,11 +16,11 @@
     color: #0066cc;
     text-decoration: none;
   }
-  a:hover { text-decoration: underline; }
+  a:hover { text-decoration: none; }
   
   /* HEADER */
   header {
-    background: #002e5d;           /* deep gov-blue */
+    background: #002e5d;
     color: #fff;
   }
   header .header-inner {
@@ -56,19 +58,28 @@
     padding: 12px 16px;
     font-weight: 500;
     color: #002e5d;
+    border: 2px solid #002e5d;
     border-radius: 4px;
-    transition: background 0.2s, color 0.2s;
+    background: transparent;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
   }
   nav a:hover {
-    background: #e6f0fa;
+    background: #0072ce;
+    color: #fff;
+    transform: scale(1.05);
+    text-decoration: none;
   }
   nav a.active {
     background: #0072ce;
     color: #fff;
+    border-color: #0072ce;
+    text-decoration: none;
   }
   
   /* MAIN & TABS */
   main {
+    flex: 1;
     max-width: 1000px;
     margin: 20px auto;
     padding: 0 15px;
@@ -120,4 +131,3 @@
     font-size: 0.85rem;
     margin-top: auto;
   }
-  
