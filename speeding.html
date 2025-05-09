@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Speeding Fines – Police Enforcement Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <img src="images/logo.png" alt="Australian Government"/>
+      </div>
+      <h1>Police Enforcement</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html" data-target="home" class="active">Home</a></li>
+        <!--<li><a href="#" data-target="random-breath-tests">Random breath tests</a></li>
+        <li><a href="#" data-target="drug-tests">Drug tests</a></li>-->
+        <li><a href="mobile-phone.html" data-target="mobile-phone">Mobile phone</a></li>
+        <li><a href="#" data-target="speeding">Speeding</a></li>
+        <li><a href="seatbelts.html" data-target="seatbelts">Non-wearing seatbelts</a></li>
+        <!--<li><a href="#" data-target="unlicensed-driving">Unlicensed driving</a></li>-->
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="tab-content active">
+      <h2>Speeding Fines</h2>
+      <p>Here you can explore trends in speeding fines issued across Australia, including camera-detected offences.</p>
+      <div id="chart-speeding" class="chart-container">
+        <!-- Chart.js or D3 goes here -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Australian Government Department of Infrastructure, Transport, Regional Development, Communications and the Arts</p>
+  </footer>
+
+  <script src="js/scripts.js" defer></script>
+</body>
+</html>
