@@ -121,7 +121,7 @@
 
       d3.csv("database/mobile_use.csv").then(data => {
         const filteredData = data.filter(d =>
-          d["Detection Method"] && d["METRIC"].toLowerCase()//.includes
+          d["DETECTION_METHOD"] && d["METRIC"].toLowerCase()//.includes
         );
 
         filteredData.forEach(d => {
