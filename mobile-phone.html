@@ -2,9 +2,68 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mobile Phone Offences – Police Enforcement Dashboard</title>
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css"/>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    .chart-container {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .bar {
+      fill: #4285F4;
+      transition: fill 0.3s ease;
+    }
+
+    .bar:hover {
+      fill: #EA4335;
+    }
+
+    .tooltip {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.85);
+      color: white;
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      pointer-events: none;
+      font-size: 0.875rem;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+      line-height: 1.5;
+    }
+
+    .axis-label {
+      font-weight: 600;
+      font-size: 0.875rem;
+      fill: #555;
+    }
+
+    .axis text {
+      font-size: 0.75rem;
+      fill: #666;
+    }
+
+    .tab-content {
+      padding: 1.5rem;
+    }
+
+    .tab-content h2 {
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+
+    .tab-content p {
+      color: #555;
+      margin-bottom: 2rem;
+      max-width: 800px;
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -16,10 +75,10 @@
     </div>
     <nav>
       <ul>
-        <li><a href="index.html" data-target="home" class="active">Home</a></li>
+        <li><a href="index.html" data-target="home">Home</a></li>
         <li><a href="#" data-target="random-breath-tests">Random breath tests</a></li>
         <li><a href="#" data-target="drug-tests">Drugs on the Road</a></li>
-        <li><a href="" data-target="mobile-phone">Mobile phone</a></li>
+        <li><a href="mobile-phone.html" data-target="mobile-phone" class="active">Mobile phone</a></li>
         <li><a href="speeding.html" data-target="speeding">Speeding</a></li>
         <li><a href="seatbelts.html" data-target="seatbelts">Non-wearing seatbelts</a></li>
         <li><a href="#" data-target="unlicensed-driving">Unlicensed driving</a></li>
@@ -30,9 +89,9 @@
   <main>
     <section class="tab-content active">
       <h2>Mobile Phone Offences</h2>
-      <p>Interactive visualisation of mobile-phone-related fines (handheld & handsfree), camera vs police-detected.</p>
+      <p>This visualization shows the distribution of mobile phone-related fines across Australian states, comparing handheld and handsfree offences detected by both cameras and police officers.</p>
       <div id="chart-mobile" class="chart-container">
-        <!-- Chart.js or D3 goes here -->
+        <svg width="100%" height="500" viewBox="0 0 900 500" preserveAspectRatio="xMidYMid meet"></svg>
       </div>
     </section>
   </main>
@@ -41,6 +100,131 @@
     <p>© 2025 Australian Government Department of Infrastructure, Transport, Regional Development, Communications and the Arts</p>
   </footer>
 
-  <script src="js/scripts.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const svg = d3.select("svg");
+      const container = d3.select(".chart-container");
+      const containerWidth = container.node().getBoundingClientRect().width;
+
+      const margin = { top: 50, right: 40, bottom: 90, left: 70 };
+      const width = Math.min(900, containerWidth) - margin.left - margin.right;
+      const height = 500 - margin.top - margin.bottom;
+
+      svg.selectAll("*").remove();
+
+      const chart = svg.append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+      const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
+      d3.csv("database/mobile_use.csv").then(data => {
+        const filteredData = data.filter(d =>
+          d["Detection Method"] && d["METRIC"].toLowerCase()//.includes
+        );
+
+        filteredData.forEach(d => {
+          d.Fines = +String(d.Fines).replace(/[^0-9.-]+/g, "") || 0;
+        });
+
+        const finesByState = d3.rollups(
+          filteredData,
+          v => d3.sum(v, d => d.Fines),
+          d => d.State
+        ).map(([State, Fines]) => ({ State, Fines }))
+         .sort((a, b) => b.Fines - a.Fines);
+
+        const x = d3.scaleBand()
+          .domain(finesByState.map(d => d.State))
+          .range([0, width])
+          .padding(0.2);
+
+        const y = d3.scaleLinear()
+          .domain([0, d3.max(finesByState, d => d.Fines) * 1.05])
+          .nice()
+          .range([height, 0]);
+
+        chart.append("g")
+          .attr("transform", `translate(0,${height})`)
+          .call(d3.axisBottom(x))
+          .selectAll("text")
+          .attr("transform", "rotate(-40)")
+          .style("text-anchor", "end")
+          .attr("dy", "0.5em");
+
+        chart.append("g")
+          .call(d3.axisLeft(y).ticks(6).tickFormat(d => d3.format(".2s")(d).replace("G", "B")));
+
+        chart.append("text")
+          .attr("x", width / 2)
+          .attr("y", height + margin.bottom - 20)
+          .attr("class", "axis-label")
+          .attr("text-anchor", "middle")
+          .text("State or Territory");
+
+        chart.append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", -margin.left + 15)
+          .attr("x", -height / 2)
+          .attr("class", "axis-label")
+          .attr("text-anchor", "middle")
+          .text("Number of Fines");
+
+        chart.append("text")
+          .attr("x", width / 2)
+          .attr("y", -20)
+          .attr("text-anchor", "middle")
+          .style("font-size", "1.1rem")
+          .style("font-weight", "600")
+          .text("Mobile Phone Offences by State/Territory");
+
+        chart.selectAll(".bar")
+          .data(finesByState)
+          .enter()
+          .append("rect")
+          .attr("class", "bar")
+          .attr("x", d => x(d.State))
+          .attr("y", d => y(d.Fines))
+          .attr("width", x.bandwidth())
+          .attr("height", d => height - y(d.Fines))
+          .on("mouseover", function (event, d) {
+            d3.select(this).attr("fill", "#FBBC05");
+
+            tooltip.transition()
+              .duration(200)
+              .style("opacity", 0.95);
+
+            tooltip.html(`
+              <div><strong>${d.State}</strong></div>
+              <div>Total Fines: ${d3.format(",")(d.Fines)}</div>
+              <div>Rank: ${finesByState.findIndex(item => item.State === d.State) + 1} of ${finesByState.length}</div>
+            `)
+              .style("left", `${event.pageX + 15}px`)
+              .style("top", `${event.pageY - 45 + window.scrollY}px`);
+          })
+          .on("mouseout", function () {
+            d3.select(this).attr("fill", "#4285F4");
+            tooltip.transition()
+              .duration(500)
+              .style("opacity", 0);
+          });
+
+      }).catch(error => {
+        console.error("Error loading or processing data:", error);
+        chart.append("text")
+          .attr("x", width / 2)
+          .attr("y", height / 2)
+          .attr("text-anchor", "middle")
+          .style("fill", "red")
+          .text("Error loading data. Please try again later.");
+      });
+
+      // Optional: simple responsive reload (not ideal for all apps)
+      window.addEventListener('resize', () => {
+        location.reload();
+      });
+    });
+  </script>
 </body>
 </html>
