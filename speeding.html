@@ -5,6 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Speeding Fines – Police Enforcement Dashboard</title>
   <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    .chart-container {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .tooltip {
+      position: absolute;
+      background: rgba(0,0,0,0.85);
+      color: white;
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      pointer-events: none;
+      z-index: 999;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -31,9 +52,7 @@
     <section class="tab-content active">
       <h2>Speeding Fines</h2>
       <p>Here you can explore trends in speeding fines issued across Australia, including camera-detected offences.</p>
-      <div id="chart-speeding" class="chart-container">
-        <!-- Chart.js or D3 goes here -->
-      </div>
+      <div id="chart-speeding" class="chart-container"></div>
     </section>
   </main>
 
@@ -41,6 +60,106 @@
     <p>© 2025 Australian Government Department of Infrastructure, Transport, Regional Development, Communications and the Arts</p>
   </footer>
 
-  <script src="js/scripts.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const margin = { top: 80, right: 20, bottom: 60, left: 100 };
+      const width = 800 - margin.left - margin.right;
+      const height = 500 - margin.top - margin.bottom;
+
+      const svg = d3.select("#chart-speeding")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+      d3.csv("database/speeding.csv").then(data => {
+        data.forEach(d => d.FINES = +d.FINES || 0);
+
+        const nested = d3.rollups(
+          data,
+          v => d3.sum(v, d => d.FINES),
+          d => d.JURISDICTION,
+          d => d.AGE_GROUP
+        );
+
+        const jurisdictions = Array.from(new Set(data.map(d => d.JURISDICTION)));
+        const ageGroups = Array.from(new Set(data.map(d => d.AGE_GROUP)));
+
+        const heatData = [];
+        nested.forEach(([jurisdiction, ageMap]) => {
+          ageMap.forEach(([age, fines]) => {
+            heatData.push({ jurisdiction, age, fines });
+          });
+        });
+
+        const x = d3.scaleBand().domain(ageGroups).range([0, width]).padding(0.05);
+        const y = d3.scaleBand().domain(jurisdictions).range([0, height]).padding(0.05);
+        const color = d3.scaleSequential()
+          .interpolator(d3.interpolateYlOrRd)
+          .domain([0, d3.max(heatData, d => d.fines)]);
+
+        svg.append("g")
+          .attr("transform", `translate(0,${height})`)
+          .call(d3.axisBottom(x))
+          .selectAll("text")
+          .style("font-size", "12px");
+
+        svg.append("g")
+          .call(d3.axisLeft(y))
+          .selectAll("text")
+          .style("font-size", "12px");
+
+        const tooltip = d3.select("body").append("div")
+          .attr("class", "tooltip")
+          .style("opacity", 0);
+
+        svg.selectAll()
+          .data(heatData, d => d.jurisdiction + ':' + d.age)
+          .enter()
+          .append("rect")
+          .attr("x", d => x(d.age))
+          .attr("y", d => y(d.jurisdiction))
+          .attr("width", x.bandwidth())
+          .attr("height", y.bandwidth())
+          .style("fill", d => color(d.fines))
+          .style("stroke", "#fff")
+          .on("mouseover", function (event, d) {
+            tooltip.transition().duration(200).style("opacity", .9);
+            tooltip.html(`<strong>${d.jurisdiction}</strong><br/>Age ${d.age}<br/>Fines: ${d.fines}`)
+              .style("left", (event.pageX + 15) + "px")
+              .style("top", (event.pageY - 30) + "px");
+            d3.select(this).style("stroke", "#000");
+          })
+          .on("mouseout", function () {
+            tooltip.transition().duration(500).style("opacity", 0);
+            d3.select(this).style("stroke", "#fff");
+          });
+
+        svg.append("text")
+          .attr("x", width / 2)
+          .attr("y", -40)
+          .attr("text-anchor", "middle")
+          .style("font-size", "18px")
+          .style("font-weight", "bold")
+          .text("Speeding Fines Heatmap: Jurisdiction vs Age Group");
+
+        svg.append("text")
+          .attr("x", width / 2)
+          .attr("y", height + 50)
+          .attr("text-anchor", "middle")
+          .style("font-size", "13px")
+          .text("Age Group");
+
+        svg.append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("x", -height / 2)
+          .attr("y", -60)
+          .attr("text-anchor", "middle")
+          .style("font-size", "13px")
+          .text("Jurisdiction");
+      });
+    });
+  </script>
 </body>
 </html>
