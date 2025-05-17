@@ -1,0 +1,503 @@
+﻿YEAR,JURISDICTION,LOCATION,AGE_GROUP,METRIC,DETECTION_METHOD,FINES
+2023,NSW,Inner Regional Australia,0-16,non_wearing_seatbelts,Police issued,5
+2023,NSW,Major Cities of Australia,0-16,non_wearing_seatbelts,Police issued,1
+2023,NSW,Outer Regional Australia,0-16,non_wearing_seatbelts,Police issued,2
+2023,VIC,Inner Regional Australia,0-16,non_wearing_seatbelts,Police issued,1
+2023,VIC,Outer Regional Australia,0-16,non_wearing_seatbelts,Police issued,1
+2023,ACT,Major Cities of Australia,0-16,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,0-16,non_wearing_seatbelts,Police issued,3
+2023,NSW,Major Cities of Australia,0-16,non_wearing_seatbelts,Police issued,4
+2023,NSW,Outer Regional Australia,0-16,non_wearing_seatbelts,Police issued,1
+2023,VIC,Major Cities of Australia,0-16,non_wearing_seatbelts,Police issued,1
+2023,VIC,Outer Regional Australia,0-16,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,0-16,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,0-16,non_wearing_seatbelts,Police issued,2
+2023,VIC,Major Cities of Australia,0-16,non_wearing_seatbelts,Police issued,3
+2023,NSW,Inner Regional Australia,0-16,non_wearing_seatbelts,Police issued,4
+2023,NSW,Major Cities of Australia,0-16,non_wearing_seatbelts,Police issued,4
+2023,VIC,Major Cities of Australia,0-16,non_wearing_seatbelts,Police issued,2
+2023,NSW,Inner Regional Australia,0-16,non_wearing_seatbelts,Police issued,1
+2023,NSW,Major Cities of Australia,0-16,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,0-16,non_wearing_seatbelts,Police issued,1
+2023,NSW,Major Cities of Australia,0-16,non_wearing_seatbelts,Police issued,3
+2023,NSW,Outer Regional Australia,0-16,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,0-16,non_wearing_seatbelts,Police issued,2
+2023,NSW,Major Cities of Australia,0-16,non_wearing_seatbelts,Police issued,1
+2023,NSW,Outer Regional Australia,0-16,non_wearing_seatbelts,Police issued,2
+2023,NSW,Inner Regional Australia,0-16,non_wearing_seatbelts,Police issued,2
+2023,NSW,Major Cities of Australia,0-16,non_wearing_seatbelts,Police issued,1
+2023,ACT,Major Cities of Australia,0-16,non_wearing_seatbelts,Police issued,2
+2023,NSW,Inner Regional Australia,0-16,non_wearing_seatbelts,Police issued,3
+2023,NSW,Major Cities of Australia,0-16,non_wearing_seatbelts,Police issued,3
+2023,VIC,Outer Regional Australia,0-16,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,0-16,non_wearing_seatbelts,Police issued,1
+2023,NSW,Major Cities of Australia,0-16,non_wearing_seatbelts,Police issued,4
+2023,ACT,Major Cities of Australia,0-16,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,0-16,non_wearing_seatbelts,Police issued,2
+2023,NSW,Major Cities of Australia,0-16,non_wearing_seatbelts,Police issued,3
+2023,NSW,Outer Regional Australia,0-16,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,0-16,non_wearing_seatbelts,Police issued,1
+2023,NSW,Major Cities of Australia,0-16,non_wearing_seatbelts,Police issued,5
+2023,ACT,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,85
+2023,NSW,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,148
+2023,NSW,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,24
+2023,NSW,Remote Australia,17-25,non_wearing_seatbelts,Police issued,4
+2023,NSW,Very Remote Australia,17-25,non_wearing_seatbelts,Police issued,2
+2023,VIC,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,54
+2023,VIC,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,82
+2023,VIC,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,15
+2023,VIC,Remote Australia,17-25,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,70
+2023,NSW,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,137
+2023,NSW,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,27
+2023,NSW,Very Remote Australia,17-25,non_wearing_seatbelts,Police issued,2
+2023,VIC,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,39
+2023,VIC,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,73
+2023,VIC,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,10
+2023,ACT,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,70
+2023,NSW,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,137
+2023,NSW,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,20
+2023,NSW,Remote Australia,17-25,non_wearing_seatbelts,Police issued,3
+2023,NSW,Very Remote Australia,17-25,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,64
+2023,VIC,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,79
+2023,VIC,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,11
+2023,ACT,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,2
+2023,NSW,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,69
+2023,NSW,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,155
+2023,NSW,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,16
+2023,NSW,Remote Australia,17-25,non_wearing_seatbelts,Police issued,6
+2023,VIC,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,37
+2023,VIC,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,72
+2023,VIC,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,4
+2023,ACT,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,3
+2023,NSW,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,71
+2023,NSW,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,92
+2023,NSW,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,22
+2023,NSW,Remote Australia,17-25,non_wearing_seatbelts,Police issued,3
+2023,VIC,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,27
+2023,VIC,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,48
+2023,VIC,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,9
+2023,NSW,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,84
+2023,NSW,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,137
+2023,NSW,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,37
+2023,VIC,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,33
+2023,VIC,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,72
+2023,VIC,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,6
+2023,ACT,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,8
+2023,NSW,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,43
+2023,NSW,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,85
+2023,NSW,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,12
+2023,NSW,Remote Australia,17-25,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,26
+2023,VIC,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,53
+2023,VIC,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,5
+2023,ACT,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,2
+2023,NSW,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,73
+2023,NSW,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,113
+2023,NSW,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,12
+2023,NSW,Remote Australia,17-25,non_wearing_seatbelts,Police issued,1
+2023,NSW,Very Remote Australia,17-25,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,27
+2023,VIC,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,76
+2023,VIC,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,12
+2023,ACT,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,2
+2023,NSW,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,63
+2023,NSW,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,98
+2023,NSW,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,24
+2023,NSW,Remote Australia,17-25,non_wearing_seatbelts,Police issued,1
+2023,NSW,Very Remote Australia,17-25,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,36
+2023,VIC,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,86
+2023,VIC,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,12
+2023,NSW,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,71
+2023,NSW,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,127
+2023,NSW,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,28
+2023,VIC,Inner Regional Australia,17-25,non_wearing_seatbelts,Mobile camera,40
+2023,VIC,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,25
+2023,VIC,Major Cities of Australia,17-25,non_wearing_seatbelts,Mobile camera,184
+2023,VIC,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,59
+2023,VIC,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,7
+2023,ACT,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,5
+2023,NSW,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,64
+2023,NSW,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,92
+2023,NSW,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,33
+2023,NSW,Remote Australia,17-25,non_wearing_seatbelts,Police issued,1
+2023,NSW,Very Remote Australia,17-25,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,17-25,non_wearing_seatbelts,Mobile camera,42
+2023,VIC,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,33
+2023,VIC,Major Cities of Australia,17-25,non_wearing_seatbelts,Mobile camera,136
+2023,VIC,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,60
+2023,VIC,Outer Regional Australia,17-25,non_wearing_seatbelts,Mobile camera,1
+2023,VIC,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,9
+2023,ACT,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,3
+2023,NSW,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,72
+2023,NSW,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,143
+2023,NSW,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,9
+2023,NSW,Remote Australia,17-25,non_wearing_seatbelts,Police issued,2
+2023,VIC,Inner Regional Australia,17-25,non_wearing_seatbelts,Mobile camera,103
+2023,VIC,Inner Regional Australia,17-25,non_wearing_seatbelts,Police issued,32
+2023,VIC,Major Cities of Australia,17-25,non_wearing_seatbelts,Mobile camera,175
+2023,VIC,Major Cities of Australia,17-25,non_wearing_seatbelts,Police issued,75
+2023,VIC,Outer Regional Australia,17-25,non_wearing_seatbelts,Police issued,8
+2023,ACT,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,155
+2023,NSW,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,216
+2023,NSW,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,48
+2023,NSW,Remote Australia,26-39,non_wearing_seatbelts,Police issued,2
+2023,NSW,Very Remote Australia,26-39,non_wearing_seatbelts,Police issued,3
+2023,VIC,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,65
+2023,VIC,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,185
+2023,VIC,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,7
+2023,ACT,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,3
+2023,NSW,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,84
+2023,NSW,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,173
+2023,NSW,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,47
+2023,NSW,Remote Australia,26-39,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,69
+2023,VIC,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,157
+2023,VIC,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,15
+2023,ACT,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,99
+2023,NSW,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,186
+2023,NSW,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,43
+2023,NSW,Remote Australia,26-39,non_wearing_seatbelts,Police issued,1
+2023,NSW,Very Remote Australia,26-39,non_wearing_seatbelts,Police issued,2
+2023,VIC,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,71
+2023,VIC,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,178
+2023,VIC,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,17
+2023,ACT,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,3
+2023,NSW,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,129
+2023,NSW,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,280
+2023,NSW,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,57
+2023,NSW,Remote Australia,26-39,non_wearing_seatbelts,Police issued,6
+2023,NSW,Very Remote Australia,26-39,non_wearing_seatbelts,Police issued,3
+2023,VIC,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,65
+2023,VIC,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,161
+2023,VIC,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,10
+2023,ACT,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,2
+2023,NSW,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,88
+2023,NSW,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,185
+2023,NSW,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,42
+2023,NSW,Remote Australia,26-39,non_wearing_seatbelts,Police issued,2
+2023,NSW,Very Remote Australia,26-39,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,54
+2023,VIC,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,140
+2023,VIC,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,7
+2023,ACT,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,2
+2023,NSW,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,144
+2023,NSW,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,247
+2023,NSW,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,57
+2023,NSW,Remote Australia,26-39,non_wearing_seatbelts,Police issued,1
+2023,NSW,Very Remote Australia,26-39,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,56
+2023,VIC,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,160
+2023,VIC,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,6
+2023,VIC,Remote Australia,26-39,non_wearing_seatbelts,Police issued,1
+2023,ACT,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,2
+2023,NSW,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,69
+2023,NSW,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,151
+2023,NSW,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,34
+2023,NSW,Remote Australia,26-39,non_wearing_seatbelts,Police issued,2
+2023,NSW,Very Remote Australia,26-39,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,66
+2023,VIC,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,154
+2023,VIC,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,11
+2023,ACT,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,94
+2023,NSW,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,132
+2023,NSW,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,18
+2023,NSW,Very Remote Australia,26-39,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,53
+2023,VIC,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,200
+2023,VIC,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,22
+2023,ACT,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,108
+2023,NSW,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,158
+2023,NSW,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,29
+2023,NSW,Remote Australia,26-39,non_wearing_seatbelts,Police issued,7
+2023,NSW,Very Remote Australia,26-39,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,49
+2023,VIC,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,162
+2023,VIC,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,11
+2023,ACT,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,3
+2023,NSW,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,89
+2023,NSW,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,158
+2023,NSW,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,32
+2023,NSW,Remote Australia,26-39,non_wearing_seatbelts,Police issued,6
+2023,VIC,Inner Regional Australia,26-39,non_wearing_seatbelts,Mobile camera,146
+2023,VIC,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,44
+2023,VIC,Major Cities of Australia,26-39,non_wearing_seatbelts,Mobile camera,895
+2023,VIC,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,155
+2023,VIC,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,13
+2023,VIC,Remote Australia,26-39,non_wearing_seatbelts,Police issued,1
+2023,ACT,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,105
+2023,NSW,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,154
+2023,NSW,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,26
+2023,NSW,Remote Australia,26-39,non_wearing_seatbelts,Police issued,2
+2023,NSW,Very Remote Australia,26-39,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,26-39,non_wearing_seatbelts,Mobile camera,124
+2023,VIC,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,77
+2023,VIC,Major Cities of Australia,26-39,non_wearing_seatbelts,Mobile camera,653
+2023,VIC,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,179
+2023,VIC,Outer Regional Australia,26-39,non_wearing_seatbelts,Mobile camera,4
+2023,VIC,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,12
+2023,VIC,Remote Australia,26-39,non_wearing_seatbelts,Police issued,1
+2023,ACT,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,127
+2023,NSW,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,185
+2023,NSW,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,46
+2023,NSW,Remote Australia,26-39,non_wearing_seatbelts,Police issued,1
+2023,NSW,Very Remote Australia,26-39,non_wearing_seatbelts,Police issued,2
+2023,VIC,Inner Regional Australia,26-39,non_wearing_seatbelts,Mobile camera,353
+2023,VIC,Inner Regional Australia,26-39,non_wearing_seatbelts,Police issued,59
+2023,VIC,Major Cities of Australia,26-39,non_wearing_seatbelts,Mobile camera,790
+2023,VIC,Major Cities of Australia,26-39,non_wearing_seatbelts,Police issued,159
+2023,VIC,Outer Regional Australia,26-39,non_wearing_seatbelts,Police issued,11
+2023,NSW,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,102
+2023,NSW,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,159
+2023,NSW,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,56
+2023,NSW,Remote Australia,40-64,non_wearing_seatbelts,Police issued,7
+2023,VIC,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,53
+2023,VIC,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,140
+2023,VIC,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,9
+2023,ACT,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,3
+2023,NSW,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,63
+2023,NSW,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,132
+2023,NSW,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,36
+2023,NSW,Remote Australia,40-64,non_wearing_seatbelts,Police issued,6
+2023,VIC,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,47
+2023,VIC,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,144
+2023,VIC,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,15
+2023,ACT,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,2
+2023,NSW,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,87
+2023,NSW,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,137
+2023,NSW,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,27
+2023,NSW,Remote Australia,40-64,non_wearing_seatbelts,Police issued,11
+2023,NSW,Very Remote Australia,40-64,non_wearing_seatbelts,Police issued,2
+2023,VIC,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,68
+2023,VIC,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,133
+2023,VIC,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,12
+2023,NSW,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,77
+2023,NSW,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,171
+2023,NSW,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,22
+2023,NSW,Remote Australia,40-64,non_wearing_seatbelts,Police issued,3
+2023,NSW,Very Remote Australia,40-64,non_wearing_seatbelts,Police issued,3
+2023,VIC,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,63
+2023,VIC,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,134
+2023,VIC,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,3
+2023,ACT,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,4
+2023,NSW,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,69
+2023,NSW,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,132
+2023,NSW,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,20
+2023,NSW,Remote Australia,40-64,non_wearing_seatbelts,Police issued,5
+2023,VIC,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,60
+2023,VIC,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,99
+2023,VIC,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,9
+2023,ACT,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,2
+2023,NSW,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,81
+2023,NSW,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,155
+2023,NSW,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,44
+2023,NSW,Remote Australia,40-64,non_wearing_seatbelts,Police issued,1
+2023,NSW,Very Remote Australia,40-64,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,63
+2023,VIC,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,101
+2023,VIC,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,9
+2023,NSW,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,53
+2023,NSW,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,115
+2023,NSW,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,23
+2023,VIC,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,49
+2023,VIC,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,118
+2023,VIC,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,14
+2023,ACT,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,4
+2023,NSW,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,65
+2023,NSW,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,84
+2023,NSW,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,40
+2023,NSW,Remote Australia,40-64,non_wearing_seatbelts,Police issued,2
+2023,VIC,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,51
+2023,VIC,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,132
+2023,VIC,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,17
+2023,ACT,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,2
+2023,NSW,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,56
+2023,NSW,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,104
+2023,NSW,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,28
+2023,NSW,Remote Australia,40-64,non_wearing_seatbelts,Police issued,9
+2023,VIC,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,42
+2023,VIC,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,114
+2023,VIC,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,19
+2023,VIC,Remote Australia,40-64,non_wearing_seatbelts,Police issued,2
+2023,ACT,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,2
+2023,NSW,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,66
+2023,NSW,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,111
+2023,NSW,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,34
+2023,NSW,Remote Australia,40-64,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,40-64,non_wearing_seatbelts,Mobile camera,175
+2023,VIC,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,45
+2023,VIC,Major Cities of Australia,40-64,non_wearing_seatbelts,Mobile camera,1150
+2023,VIC,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,82
+2023,VIC,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,20
+2023,VIC,Remote Australia,40-64,non_wearing_seatbelts,Police issued,1
+2023,ACT,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,69
+2023,NSW,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,61
+2023,NSW,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,40
+2023,NSW,Remote Australia,40-64,non_wearing_seatbelts,Police issued,3
+2023,NSW,Very Remote Australia,40-64,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,40-64,non_wearing_seatbelts,Mobile camera,220
+2023,VIC,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,52
+2023,VIC,Major Cities of Australia,40-64,non_wearing_seatbelts,Mobile camera,765
+2023,VIC,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,122
+2023,VIC,Outer Regional Australia,40-64,non_wearing_seatbelts,Mobile camera,11
+2023,VIC,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,14
+2023,ACT,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,85
+2023,NSW,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,128
+2023,NSW,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,29
+2023,NSW,Remote Australia,40-64,non_wearing_seatbelts,Police issued,5
+2023,VIC,Inner Regional Australia,40-64,non_wearing_seatbelts,Mobile camera,521
+2023,VIC,Inner Regional Australia,40-64,non_wearing_seatbelts,Police issued,46
+2023,VIC,Major Cities of Australia,40-64,non_wearing_seatbelts,Mobile camera,1094
+2023,VIC,Major Cities of Australia,40-64,non_wearing_seatbelts,Police issued,138
+2023,VIC,Outer Regional Australia,40-64,non_wearing_seatbelts,Police issued,8
+2023,NSW,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,25
+2023,NSW,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,28
+2023,NSW,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,18
+2023,NSW,Remote Australia,65 and over,non_wearing_seatbelts,Police issued,2
+2023,VIC,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,14
+2023,VIC,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,27
+2023,VIC,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,8
+2023,ACT,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,24
+2023,NSW,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,24
+2023,NSW,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,4
+2023,VIC,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,23
+2023,VIC,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,14
+2023,VIC,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,4
+2023,VIC,Remote Australia,65 and over,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,8
+2023,NSW,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,18
+2023,NSW,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,7
+2023,NSW,Remote Australia,65 and over,non_wearing_seatbelts,Police issued,2
+2023,VIC,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,13
+2023,VIC,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,11
+2023,VIC,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,6
+2023,NSW,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,14
+2023,NSW,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,23
+2023,NSW,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,6
+2023,NSW,Remote Australia,65 and over,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,17
+2023,VIC,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,17
+2023,VIC,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,3
+2023,NSW,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,8
+2023,NSW,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,8
+2023,NSW,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,5
+2023,VIC,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,21
+2023,VIC,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,21
+2023,VIC,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,2
+2023,NSW,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,23
+2023,NSW,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,20
+2023,NSW,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,4
+2023,NSW,Remote Australia,65 and over,non_wearing_seatbelts,Police issued,2
+2023,VIC,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,9
+2023,VIC,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,11
+2023,VIC,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,4
+2023,NSW,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,21
+2023,NSW,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,12
+2023,NSW,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,10
+2023,VIC,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,19
+2023,VIC,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,24
+2023,VIC,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,4
+2023,NSW,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,14
+2023,NSW,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,18
+2023,NSW,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,12
+2023,NSW,Remote Australia,65 and over,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,11
+2023,VIC,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,30
+2023,VIC,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,7
+2023,VIC,Remote Australia,65 and over,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,12
+2023,NSW,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,17
+2023,NSW,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,7
+2023,VIC,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,13
+2023,VIC,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,20
+2023,VIC,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,9
+2023,VIC,Remote Australia,65 and over,non_wearing_seatbelts,Police issued,1
+2023,ACT,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,1
+2023,NSW,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,12
+2023,NSW,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,17
+2023,NSW,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,8
+2023,VIC,Inner Regional Australia,65 and over,non_wearing_seatbelts,Mobile camera,104
+2023,VIC,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,6
+2023,VIC,Major Cities of Australia,65 and over,non_wearing_seatbelts,Mobile camera,409
+2023,VIC,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,16
+2023,VIC,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,8
+2023,NSW,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,18
+2023,NSW,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,18
+2023,NSW,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,7
+2023,NSW,Remote Australia,65 and over,non_wearing_seatbelts,Police issued,3
+2023,VIC,Inner Regional Australia,65 and over,non_wearing_seatbelts,Mobile camera,102
+2023,VIC,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,15
+2023,VIC,Major Cities of Australia,65 and over,non_wearing_seatbelts,Mobile camera,196
+2023,VIC,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,13
+2023,VIC,Outer Regional Australia,65 and over,non_wearing_seatbelts,Mobile camera,13
+2023,VIC,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,5
+2023,NSW,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,13
+2023,NSW,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,23
+2023,NSW,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,8
+2023,NSW,Very Remote Australia,65 and over,non_wearing_seatbelts,Police issued,1
+2023,VIC,Inner Regional Australia,65 and over,non_wearing_seatbelts,Mobile camera,158
+2023,VIC,Inner Regional Australia,65 and over,non_wearing_seatbelts,Police issued,12
+2023,VIC,Major Cities of Australia,65 and over,non_wearing_seatbelts,Mobile camera,328
+2023,VIC,Major Cities of Australia,65 and over,non_wearing_seatbelts,Police issued,21
+2023,VIC,Outer Regional Australia,65 and over,non_wearing_seatbelts,Police issued,8
+2017,NSW,All regions,All ages,non_wearing_seatbelts,Police issued,22926
+2017,NSW,All regions,All ages,non_wearing_seatbelts,Fixed or mobile camera,28
+2017,WA,All regions,All ages,non_wearing_seatbelts,Police issued,7309
+2018,ACT,All regions,All ages,non_wearing_seatbelts,Police issued,197
+2018,NSW,All regions,All ages,non_wearing_seatbelts,Police issued,21538
+2018,NSW,All regions,All ages,non_wearing_seatbelts,Fixed or mobile camera,15
+2018,NT,All regions,All ages,non_wearing_seatbelts,Police issued,2558
+2018,QLD,All regions,All ages,non_wearing_seatbelts,Police issued,8789
+2018,SA,All regions,All ages,non_wearing_seatbelts,Police issued,4909
+2018,VIC,All regions,All ages,non_wearing_seatbelts,Police issued,13595
+2018,WA,All regions,All ages,non_wearing_seatbelts,Police issued,5953
+2019,ACT,All regions,All ages,non_wearing_seatbelts,Police issued,174
+2019,NSW,All regions,All ages,non_wearing_seatbelts,Police issued,19348
+2019,NSW,All regions,All ages,non_wearing_seatbelts,Fixed or mobile camera,7
+2019,NT,All regions,All ages,non_wearing_seatbelts,Police issued,3521
+2019,QLD,All regions,All ages,non_wearing_seatbelts,Police issued,9009
+2019,SA,All regions,All ages,non_wearing_seatbelts,Police issued,4386
+2019,VIC,All regions,All ages,non_wearing_seatbelts,Police issued,11835
+2019,WA,All regions,All ages,non_wearing_seatbelts,Police issued,4469
+2020,ACT,All regions,All ages,non_wearing_seatbelts,Police issued,143
+2020,NSW,All regions,All ages,non_wearing_seatbelts,Police issued,11715
+2020,NSW,All regions,All ages,non_wearing_seatbelts,Fixed or mobile camera,5
+2020,NT,All regions,All ages,non_wearing_seatbelts,Police issued,2111
+2020,QLD,All regions,All ages,non_wearing_seatbelts,Police issued,6108
+2020,SA,All regions,All ages,non_wearing_seatbelts,Police issued,3935
+2020,TAS,All regions,All ages,non_wearing_seatbelts,Police issued,1332
+2020,VIC,All regions,All ages,non_wearing_seatbelts,Police issued,7757
+2020,WA,All regions,All ages,non_wearing_seatbelts,Police issued,2804
+2021,ACT,All regions,All ages,non_wearing_seatbelts,Police issued,60
+2021,NSW,All regions,All ages,non_wearing_seatbelts,Police issued,9597
+2021,NSW,All regions,All ages,non_wearing_seatbelts,Fixed or mobile camera,5
+2021,NT,All regions,All ages,non_wearing_seatbelts,Police issued,1123
+2021,QLD,All regions,All ages,non_wearing_seatbelts,Police issued,5051
+2021,QLD,All regions,All ages,non_wearing_seatbelts,Fixed or mobile camera,5346
+2021,SA,All regions,All ages,non_wearing_seatbelts,Police issued,2684
+2021,TAS,All regions,All ages,non_wearing_seatbelts,Police issued,1129
+2021,VIC,All regions,All ages,non_wearing_seatbelts,Police issued,6342
+2021,WA,All regions,All ages,non_wearing_seatbelts,Police issued,1856
+2022,ACT,All regions,All ages,non_wearing_seatbelts,Police issued,41
+2022,NSW,All regions,All ages,non_wearing_seatbelts,Police issued,9720
+2022,NSW,All regions,All ages,non_wearing_seatbelts,Fixed or mobile camera,2
+2022,NT,All regions,All ages,non_wearing_seatbelts,Police issued,1166
+2022,QLD,All regions,All ages,non_wearing_seatbelts,Police issued,3848
+2022,QLD,All regions,All ages,non_wearing_seatbelts,Fixed or mobile camera,52079
+2022,SA,All regions,All ages,non_wearing_seatbelts,Police issued,3046
+2022,TAS,All regions,All ages,non_wearing_seatbelts,Police issued,890
+2022,VIC,All regions,All ages,non_wearing_seatbelts,Police issued,7492
+2022,WA,All regions,All ages,non_wearing_seatbelts,Police issued,2186
