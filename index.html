@@ -1,37 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Police Enforcement Dashboard</title>
   <link rel="stylesheet" href="css/styles.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://d3js.org/topojson.v3.min.js"></script>
+  <style>
+    .chart-container {
+      max-width: 900px;
+      margin: 2rem auto;
+    }
+    #bubble-map {
+      display: block;
+      margin: 2rem auto;
+    }
+    .tooltip {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.75);
+      color: white;
+      padding: 6px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      pointer-events: none;
+      z-index: 1000;
+    }
+  </style>
 </head>
 <body>
 
   <header>
     <div class="header-inner">
       <div class="logo">
-
         <img src="images/logo.png" alt="Australian Government">
       </div>
       <h1>Police Enforcement Data</h1>
     </div>
     <nav>
       <ul>
-        <li><a href="#" data-target="home" class="active">Home</a></li>
-        <!--<li><a href="#" data-target="random-breath-tests">Random breath tests</a></li>-->
+        <li><a href="index.html" data-target="home" class="active">Home</a></li>
+        <li><a href="#" data-target="random-breath-tests">Random breath tests</a></li>
         <li><a href="drugtests.html" data-target="drug-tests">Drugs on the Road</a></li>
         <li><a href="mobile-phone.html" data-target="mobile-phone">Mobile phone</a></li>
         <li><a href="speeding.html" data-target="speeding">Speeding</a></li>
-        <!--<li><a href="seatbelts.html" data-target="seatbelts">Non-wearing seatbelts</a></li>
-        <li><a href="#" data-target="unlicensed-driving">Unlicensed driving</a></li>-->
+        <li><a href="seatbelts.html" data-target="seatbelts">Seatbelt offences</a></li>
+        <li><a href="unlicensed_driving.html" data-target="unlicensed-driving">Unlicensed driving</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
     <section id="home" class="tab-content active">
-      <h2>Annual Enforcement series</h2>
+      <h2>Annual Enforcement Series</h2>
       <ul>
         <li><strong>Random breath tests</strong> conducted, share of positive random breath test results.</li>
         <li><strong>Drug tests</strong> conducted and share of positive roadside drug test results.</li>
@@ -47,56 +68,120 @@
       <h3>Notes</h3>
       <ul>
         <li>For the source of the dataset please refer to the <a href="https://www.bitre.gov.au/publications/2024/road-safety-enforcement-data">Office of Road Safety website</a>.</li>
-        <li>Annual drivers licence data is sourced from the Australian Infrastructure and Transport Statistics Yearbook.</li>
-        <li>The Department of Infrastructure, Transport, Regional Development, Communications and the Arts gratefully acknowledges the provision of data from the following agencies:</li>
-        <li>NSW Police Force, Transport for NSW, Revenue NSW</li>
-        <li>Victoria Police, Department of Transport, Victoria</li>
-        <li>… etc.</li>
+        <li>Data sourced from multiple Australian agencies.</li>
       </ul>
+      <h2>Bubble Map – Enforcement Fines by Offense (2023)</h2>
+      <svg id="bubble-map" width="960" height="600"></svg>
     </section>
-
-    <section id="random-breath-tests" class="tab-content">
-      <h2>Random Breath Tests</h2>
-      <p>Placeholder for interactive chart of random breath test counts and positivity rates over time.</p>
-      <div id="chart-random-breath" class="chart-container"></div>
-    </section>
-
-    <section id="drug-tests" class="tab-content">
-      <h2>Drug Tests</h2>
-      <p>Placeholder for roadside drug tests conducted and share of positives.</p>
-      <div id="chart-drugs" class="chart-container"></div>
-    </section>
-
-    <section id="mobile-phone" class="tab-content">
-      <h2>Mobile Phone Offences</h2>
-      <p>Placeholder for mobile phone fines issued (including camera detection).</p>
-      <div id="chart-mobile" class="chart-container"></div>
-    </section>
-
-    <section id="speeding" class="tab-content">
-      <h2>Speeding Fines</h2>
-      <p>Placeholder for speeding fines issued (including camera detection).</p>
-      <div id="chart-speeding" class="chart-container"></div>
-    </section>
-
-    <section id="seatbelts" class="tab-content">
-      <h2>Seatbelt Offences</h2>
-      <p>Placeholder for seatbelt fines issued by police and cameras.</p>
-      <div id="chart-seatbelts" class="chart-container"></div>
-    </section>
-
-    <section id="unlicensed-driving" class="tab-content">
-      <h2>Unlicensed Driving</h2>
-      <p>Placeholder for unlicensed driving offences issued by police.</p>
-      <div id="chart-unlicensed" class="chart-container"></div>
-    </section>
-    
   </main>
 
   <footer>
     <p>© 2025 Australian Government Department of Infrastructure, Transport, Regional Development, Communications and the Arts</p>
   </footer>
 
-  <script src="js/scripts.js" defer></script>
+  <script>
+    const width = 960;
+    const height = 600;
+
+    const svg = d3.select("#bubble-map");
+
+    const tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
+    const projection = d3.geoMercator()
+      .center([134, -27])
+      .scale(1000)
+      .translate([width / 2, height / 2]);
+
+    const path = d3.geoPath().projection(projection);
+    const color = d3.scaleOrdinal(d3.schemeSet2);
+
+    const offsets = {
+      "NSW": [151.21, -33.87],
+      "VIC": [144.96, -37.81],
+      "QLD": [153.02, -27.47],
+      "SA": [138.6, -34.93],
+      "WA": [115.85, -31.95],
+      "TAS": [147.32, -42.88],
+      "NT": [130.83, -12.46],
+      "ACT": [149.13, -35.28]
+    };
+
+    Promise.all([
+      d3.json("https://raw.githubusercontent.com/tonywr71/GeoJson-Data/master/australian-states.json"),
+      d3.csv("database/n_police_enforcement_2023_fines_2024-09-20.csv")
+    ]).then(([geo, data]) => {
+      const filtered = data.filter(d => d.YEAR == 2023);
+
+      const nested = [];
+
+      const grouped = d3.group(filtered, d => d.JURISDICTION, d => d.METRIC);
+      grouped.forEach((metrics, jurisdiction) => {
+        const coords = offsets[jurisdiction] ? projection(offsets[jurisdiction]) : null;
+        if (!coords) return;
+
+        metrics.forEach((entries, metric) => {
+          const total = d3.sum(entries, d => +d.FINES);
+          const detection = entries[0].DETECTION_METHOD;
+
+          nested.push({
+            jurisdiction,
+            metric,
+            detection,
+            total,
+            coords
+          });
+        });
+      });
+
+      const maxFine = d3.max(nested, d => d.total);
+      const radius = d3.scaleSqrt().domain([0, maxFine]).range([4, 40]);
+
+      svg.selectAll("path")
+        .data(geo.features)
+        .enter().append("path")
+        .attr("d", path)
+        .attr("fill", "#f1f1f1")
+        .attr("stroke", "#aaa");
+
+      svg.selectAll("circle")
+        .data(nested)
+        .enter().append("circle")
+        .attr("cx", d => d.coords[0])
+        .attr("cy", d => d.coords[1])
+        .attr("r", d => radius(d.total))
+        .attr("fill", d => color(d.metric))
+        .attr("fill-opacity", 0.7)
+        .attr("stroke", "#333")
+        .attr("stroke-width", 1)
+        .on("mouseover", function(event, d) {
+          tooltip.transition().duration(200).style("opacity", .95);
+          tooltip.html(`
+            <strong>${d.jurisdiction}</strong><br/>
+            Offense: ${d.metric.replace(/_/g, " ")}<br/>
+            Method: ${d.detection}<br/>
+            Fines: ${d.total.toLocaleString()}
+          `)
+          .style("left", (event.pageX + 10) + "px")
+          .style("top", (event.pageY - 40) + "px");
+          d3.select(this).attr("stroke-width", 2);
+        })
+        .on("mouseout", function () {
+          tooltip.transition().duration(400).style("opacity", 0);
+          d3.select(this).attr("stroke-width", 1);
+        });
+
+      // Add legend
+      const metrics = Array.from(new Set(nested.map(d => d.metric)));
+      const legend = svg.append("g").attr("transform", `translate(30, 30)`);
+
+      metrics.forEach((m, i) => {
+        const g = legend.append("g").attr("transform", `translate(0, ${i * 20})`);
+        g.append("rect").attr("width", 12).attr("height", 12).attr("fill", color(m));
+        g.append("text").attr("x", 18).attr("y", 10).text(m.replace(/_/g, " ")).style("font-size", "12px");
+      });
+    });
+  </script>
 </body>
 </html>
