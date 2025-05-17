@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Unlicensed Driving – Police Enforcement Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://d3js.org/topojson.v3.min.js"></script>
+  <style>
+    .chart-container {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .tooltip {
+      position: absolute;
+      background: rgba(0,0,0,0.85);
+      color: white;
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .map-container {
+      width: 900px;
+      margin: 0 auto;
+    }
+    #choropleth {
+      width: 100%;
+      height: 600px;
+    }
+    .state {
+      stroke: #fff;
+      stroke-width: 1px;
+    }
+    .state:hover {
+      stroke: #333;
+      stroke-width: 2px;
+    }
+    .legend {
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <img src="images/logo.png" alt="Australian Government"/>
+      </div>
+      <h1>Police Enforcement</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Random breath tests</a></li>
+        <li><a href="drugtests.html">Drugs on the Road</a></li>
+        <li><a href="mobile-phone.html">Mobile phone</a></li>
+        <li><a href="#">Speeding</a></li>
+        <li><a href="seatbelts.html">Non-wearing seatbelts</a></li>
+        <li><a href="unlicensed_driving.html" class="active">Unlicensed driving</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="tab-content active">
+      <h2>Unlicensed Driving Offenses in Australia (2023)</h2>
+      <p>Explore how unlicensed driving offenses vary across states in Australia, based on age group and detection method.</p>
+      <div class="map-container chart-container">
+        <svg id="choropleth"></svg>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Australian Government Department of Infrastructure, Transport, Regional Development, Communications and the Arts</p>
+  </footer>
+
+  <script>
+    const width = 900;
+    const height = 600;
+
+    const svg = d3.select("#choropleth")
+      .attr("width", width)
+      .attr("height", height);
+
+    const tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
+    const colorScale = d3.scaleSequential()
+      .interpolator(d3.interpolateBlues)
+      .domain([0, 3000]);
+
+    d3.json("https://raw.githubusercontent.com/tonywr71/GeoJson-Data/master/australian-states.json").then(function(australia) {
+      d3.csv("database/unlicensedcsv.csv").then(function(data) {
+        const filteredData = data.filter(d => d.YEAR === "2023");
+
+        const offenseData = d3.rollup(
+          filteredData,
+          v => d3.sum(v, d => +d.FINES),
+          d => d.JURISDICTION
+        );
+
+        const topAgeGroup = d3.rollup(
+          filteredData,
+          v => {
+            const group = d3.rollup(v, g => d3.sum(g, d => +d.FINES), d => d.AGE_GROUP);
+            return Array.from(group).reduce((a, b) => a[1] > b[1] ? a : b, ["", 0])[0];
+          },
+          d => d.JURISDICTION
+        );
+
+        const topDetection = d3.rollup(
+          filteredData,
+          v => {
+            const group = d3.rollup(v, g => d3.sum(g, d => +d.FINES), d => d.DETECTION_METHOD);
+            return Array.from(group).reduce((a, b) => a[1] > b[1] ? a : b, ["", 0])[0];
+          },
+          d => d.JURISDICTION
+        );
+
+        const maxFines = d3.max(Array.from(offenseData.values()));
+        colorScale.domain([0, maxFines]);
+
+        const projection = d3.geoMercator()
+          .center([134, -25])
+          .scale(1000)
+          .translate([width / 2, height / 2]);
+
+        const path = d3.geoPath().projection(projection);
+
+        const abbrev = {
+          "New South Wales": "NSW",
+          "Victoria": "VIC",
+          "Queensland": "QLD",
+          "South Australia": "SA",
+          "Western Australia": "WA",
+          "Tasmania": "TAS",
+          "Northern Territory": "NT",
+          "Australian Capital Territory": "ACT"
+        };
+
+        svg.selectAll(".state")
+          .data(australia.features)
+          .enter()
+          .append("path")
+          .attr("class", "state")
+          .attr("d", path)
+          .attr("fill", d => {
+            const j = abbrev[d.properties.STATE_NAME];
+            return j && offenseData.has(j) ? colorScale(offenseData.get(j)) : "#ccc";
+          })
+          .on("mouseover", function(event, d) {
+            const state = d.properties.STATE_NAME;
+            const j = abbrev[state];
+            const fines = j && offenseData.has(j) ? offenseData.get(j) : 0;
+            const ageGroup = j && topAgeGroup.has(j) ? topAgeGroup.get(j) : "N/A";
+            const detection = j && topDetection.has(j) ? topDetection.get(j) : "N/A";
+
+            tooltip.transition().duration(200).style("opacity", .95);
+            tooltip.html(
+              `<strong>${state}</strong><br/>
+              Total Fines: ${fines}<br/>
+              Top Age Group: ${ageGroup}<br/>
+              Common Detection: ${detection}`
+            )
+              .style("left", (event.pageX + 10) + "px")
+              .style("top", (event.pageY - 40) + "px");
+
+            d3.select(this).attr("stroke", "#333").attr("stroke-width", 2);
+          })
+          .on("mouseout", function() {
+            tooltip.transition().duration(500).style("opacity", 0);
+            d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1);
+          });
+
+        // Legend
+        const legendWidth = 200;
+        const legendHeight = 20;
+        const legend = svg.append("g")
+          .attr("class", "legend")
+          .attr("transform", `translate(${width - legendWidth - 20},${height - 50})`);
+
+        const legendScale = d3.scaleLinear()
+          .domain(colorScale.domain())
+          .range([0, legendWidth]);
+
+        legend.append("g")
+          .attr("transform", `translate(0,${legendHeight})`)
+          .call(d3.axisBottom(legendScale).ticks(5));
+
+        const defs = svg.append("defs");
+        const gradient = defs.append("linearGradient")
+          .attr("id", "gradient")
+          .attr("x1", "0%")
+          .attr("y1", "0%")
+          .attr("x2", "100%")
+          .attr("y2", "0%");
+
+        gradient.selectAll("stop")
+          .data(colorScale.range())
+          .enter().append("stop")
+          .attr("offset", (d, i) => i / (colorScale.range().length - 1))
+          .attr("stop-color", d => d);
+
+        legend.append("rect")
+          .attr("width", legendWidth)
+          .attr("height", legendHeight)
+          .style("fill", "url(#gradient)");
+
+        legend.append("text")
+          .attr("x", legendWidth / 2)
+          .attr("y", -10)
+          .attr("text-anchor", "middle")
+          .text("Number of Fines");
+      });
+    });
+  </script>
+</body>
+</html>
