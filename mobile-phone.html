@@ -60,6 +60,36 @@
       margin-right: 5px;
       vertical-align: middle;
     }
+
+    .button-container {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .data-toggle-btn {
+      padding: 8px 16px;
+      margin: 0 5px;
+      background-color: #4285F4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .data-toggle-btn:hover {
+      background-color: #3367D6;
+    }
+
+    .data-toggle-btn.active {
+      background-color: #0d47a1;
+    }
+
+    .chart-row {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
   </style>
 </head>
 <body>
@@ -86,10 +116,28 @@
   <main>
     <section class="tab-content active">
       <h2>Mobile Phone Offences</h2>
-      <p>This visualization shows the distribution of mobile phone-related fines across Australian states as a doughnut chart, comparing offences detected by both cameras and police officers.</p>
-      <div id="chart-mobile" class="chart-container">
-        <svg width="100%" height="500" viewBox="0 0 900 500" preserveAspectRatio="xMidYMid meet"></svg>
-        <div id="legend" class="legend" style="text-align: center; margin-top: 20px;"></div>
+      <p>This dashboard shows mobile phone-related fines across Australian states through different visualizations.</p>
+      
+      <div class="chart-row">
+        <!-- Doughnut Chart Container -->
+        <div id="doughnut-chart" class="chart-container">
+          <h3>Offences by Jurisdiction</h3>
+          <svg width="100%" height="400" viewBox="0 0 900 400" preserveAspectRatio="xMidYMid meet"></svg>
+          <div id="doughnut-legend" class="legend" style="text-align: center; margin-top: 20px;"></div>
+        </div>
+
+        <!-- Grouped Bar Chart Container -->
+        <div id="bar-chart" class="chart-container">
+          <h3>Detailed Offence Analysis</h3>
+          <div class="button-container">
+            <button class="data-toggle-btn active" data-dimension="JURISDICTION">Jurisdiction</button>
+            <button class="data-toggle-btn" data-dimension="AGE_GROUP">Age Group</button>
+            <button class="data-toggle-btn" data-dimension="LOCATION">Location</button>
+            <button class="data-toggle-btn" data-dimension="DETECTION_METHOD">Detection Method</button>
+          </div>
+          <svg width="100%" height="500" viewBox="0 0 900 500" preserveAspectRatio="xMidYMid meet"></svg>
+          <div id="bar-legend" class="legend" style="text-align: center; margin-top: 20px;"></div>
+        </div>
       </div>
     </section>
   </main>
@@ -100,105 +148,228 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const svg = d3.select('#chart-mobile svg');
-      const containerWidth = d3.select('#chart-mobile').node().getBoundingClientRect().width;
-      const radius = Math.min(containerWidth, 500) / 3;
-      
-      // Clear any existing content
-      svg.attr('viewBox', `0 0 ${containerWidth} 500`).selectAll('*').remove();
-      
-      // Center the chart
-      const g = svg.append('g')
-        .attr('transform', `translate(${containerWidth/2}, 250)`);
-      
+      // Initialize tooltip
       const tooltip = d3.select('body').append('div')
         .attr('class', 'tooltip')
         .style('opacity', 0);
 
-      // Color scale
-      const color = d3.scaleOrdinal()
-        .range(d3.schemeTableau10);
-
-      // Load CSV from same folder as HTML
+      // Load data once for both charts
       d3.csv('database/mobile_use.csv').then(data => {
-        // Process data
+        // Process data for both charts
         data.forEach(d => {
-          d.fines = +d['FINES'] || 0;
-          d.jurisdiction = d['JURISDICTION'];
+          d.FINES = +d.FINES || 0;
         });
 
-        // Aggregate fines by jurisdiction
-        const finesByJurisdiction = Array.from(
-          d3.rollup(data, v => d3.sum(v, d => d.fines), d => d.jurisdiction),
+        // Draw Doughnut Chart
+        drawDoughnutChart(data);
+        
+        // Draw Bar Chart with default view (Jurisdiction)
+        drawBarChart(data, 'JURISDICTION');
+        
+        // Set up button event listeners
+        setupDataToggleButtons(data);
+
+      }).catch(error => {
+        console.error('Error loading data:', error);
+        d3.select('#doughnut-chart svg').append('text')
+          .attr('x', 450).attr('y', 200)
+          .attr('text-anchor', 'middle')
+          .style('fill', 'red')
+          .text('Unable to load data. Check CSV path or filename.');
+      });
+
+      // Doughnut Chart Function
+      function drawDoughnutChart(data) {
+        const svg = d3.select('#doughnut-chart svg');
+        const containerWidth = d3.select('#doughnut-chart').node().getBoundingClientRect().width;
+        const radius = Math.min(containerWidth, 400) / 3;
+        
+        svg.selectAll('*').remove();
+        const g = svg.append('g').attr('transform', `translate(${containerWidth/2}, 200)`);
+        
+        // Aggregate by jurisdiction for doughnut
+        const jurisdictionData = Array.from(
+          d3.rollup(data, v => d3.sum(v, d => d.FINES), d => d.JURISDICTION),
           ([jurisdiction, fines]) => ({ jurisdiction, fines })
         ).sort((a, b) => b.fines - a.fines);
 
-        // Compute the pie layout
-        const pie = d3.pie()
-          .value(d => d.fines)
-          .sort(null);
+        const color = d3.scaleOrdinal().range(d3.schemeTableau10);
 
-        // Arc generator for the pie
-        const arc = d3.arc()
-          .innerRadius(radius * 0.6) // This creates the doughnut hole
-          .outerRadius(radius);
+        const pie = d3.pie().value(d => d.fines).sort(null);
+        const arc = d3.arc().innerRadius(radius * 0.6).outerRadius(radius);
 
-        // Generate the arcs
         const arcs = g.selectAll('.arc')
-          .data(pie(finesByJurisdiction))
-          .enter().append('g')
-            .attr('class', 'arc');
+          .data(pie(jurisdictionData))
+          .enter().append('g').attr('class', 'arc');
 
-        // Draw the arcs
         arcs.append('path')
           .attr('d', arc)
           .attr('fill', (d, i) => color(i))
           .on('mouseover', (event, d) => {
-            d3.select(event.currentTarget)
-              .attr('stroke', '#fff')
-              .attr('stroke-width', 2);
-            
+            d3.select(event.currentTarget).attr('stroke', '#fff').attr('stroke-width', 2);
             tooltip.style('opacity', 0.95)
               .html(`<strong>${d.data.jurisdiction}</strong><br/>Total Fines: ${d3.format(',')(d.data.fines)}<br/>Percentage: ${((d.endAngle - d.startAngle) / (2 * Math.PI) * 100).toFixed(1)}%`)
               .style('left', `${event.pageX + 15}px`)
               .style('top', `${event.pageY - 45}px`);
           })
           .on('mouseout', (event) => {
-            d3.select(event.currentTarget)
-              .attr('stroke', 'none');
+            d3.select(event.currentTarget).attr('stroke', 'none');
             tooltip.style('opacity', 0);
           });
 
-        // Add title
-        svg.append('text')
-          .attr('x', containerWidth/2)
-          .attr('y', 50)
-          .attr('text-anchor', 'middle')
-          .style('font-size', '1.2rem')
-          .style('font-weight', '600')
-          .text('Mobile Phone Offences by Jurisdiction');
-
-        // Add legend
-        const legend = d3.select('#legend')
+        // Legend
+        const legend = d3.select('#doughnut-legend')
           .selectAll('.legend-item')
-          .data(finesByJurisdiction)
-          .enter().append('div')
-            .attr('class', 'legend-item');
+          .data(jurisdictionData)
+          .enter().append('div').attr('class', 'legend-item');
 
         legend.append('span')
           .attr('class', 'legend-color')
           .style('background-color', (d, i) => color(i));
 
-        legend.append('span')
-          .text(d => d.jurisdiction);
+        legend.append('span').text(d => d.jurisdiction);
+      }
 
-      }).catch(error => {
-        console.error('Error loading data:', error);
+      // Bar Chart Function
+      function drawBarChart(data, dimension) {
+        const svg = d3.select('#bar-chart svg');
+        const containerWidth = d3.select('#bar-chart').node().getBoundingClientRect().width;
+        const margin = { top: 50, right: 40, bottom: 120, left: 80 };
+        const width = containerWidth - margin.left - margin.right;
+        const height = 500 - margin.top - margin.bottom;
+
+        svg.selectAll('*').remove();
+        const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+        // Group data by selected dimension and detection method
+        const groupedData = Array.from(
+          d3.rollup(data, 
+            v => Array.from(
+              d3.rollup(v, 
+                v2 => d3.sum(v2, d => d.FINES), 
+                d => d.DETECTION_METHOD
+              ),
+              ([method, fines]) => ({ method, fines })
+            ),
+            d => d[dimension]
+          ),
+          ([group, methods]) => ({ 
+            group, 
+            methods: methods.sort((a, b) => b.fines - a.fines) 
+          })
+        ).sort((a, b) => d3.sum(b.methods, d => d.fines) - d3.sum(a.methods, d => d.fines));
+
+        // Get unique detection methods for legend
+        const detectionMethods = [...new Set(data.map(d => d.DETECTION_METHOD))];
+        const color = d3.scaleOrdinal()
+          .domain(detectionMethods)
+          .range(d3.schemeTableau10);
+
+        // X scale (groups)
+        const x0 = d3.scaleBand()
+          .domain(groupedData.map(d => d.group))
+          .range([0, width])
+          .paddingInner(0.1)
+          .paddingOuter(0.1);
+
+        // X scale (sub-groups)
+        const x1 = d3.scaleBand()
+          .domain(detectionMethods)
+          .range([0, x0.bandwidth()])
+          .padding(0.05);
+
+        // Y scale
+        const y = d3.scaleLinear()
+          .domain([0, d3.max(groupedData, d => d3.max(d.methods, m => m.fines)) * 1.1])
+          .nice()
+          .range([height, 0]);
+
+        // X Axis
+        g.append('g')
+          .attr('transform', `translate(0,${height})`)
+          .call(d3.axisBottom(x0))
+          .selectAll('text')
+          .attr('transform', 'rotate(-45)')
+          .style('text-anchor', 'end')
+          .attr('dx', '-0.8em')
+          .attr('dy', '0.15em');
+
+        // Y Axis
+        g.append('g')
+          .call(d3.axisLeft(y).ticks(6).tickFormat(d3.format(',')));
+
+        // X Axis Label
         g.append('text')
+          .attr('x', width / 2)
+          .attr('y', height + margin.bottom - 60)
           .attr('text-anchor', 'middle')
-          .style('fill', 'red')
-          .text('Unable to load data. Check CSV path or filename.');
-      });
+          .style('font-weight', 'bold')
+          .text(dimension.replace('_', ' '));
+
+        // Y Axis Label
+        g.append('text')
+          .attr('transform', 'rotate(-90)')
+          .attr('y', -margin.left + 20)
+          .attr('x', -height / 2)
+          .attr('text-anchor', 'middle')
+          .style('font-weight', 'bold')
+          .text('Number of Fines');
+
+        // Bars
+        const groups = g.selectAll('.group')
+          .data(groupedData)
+          .enter().append('g')
+            .attr('class', 'group')
+            .attr('transform', d => `translate(${x0(d.group)},0)`);
+
+        groups.selectAll('rect')
+          .data(d => d.methods.map(m => ({ ...m, group: d.group })))
+          .enter().append('rect')
+            .attr('x', d => x1(d.method))
+            .attr('y', d => y(d.fines))
+            .attr('width', x1.bandwidth())
+            .attr('height', d => height - y(d.fines))
+            .attr('fill', d => color(d.method))
+            .on('mouseover', (event, d) => {
+              d3.select(event.currentTarget).attr('stroke', '#fff').attr('stroke-width', 2);
+              tooltip.style('opacity', 0.95)
+                .html(`<strong>${d.group}</strong><br/>${d.method}: ${d3.format(',')(d.fines)}`)
+                .style('left', `${event.pageX + 15}px`)
+                .style('top', `${event.pageY - 45}px`);
+            })
+            .on('mouseout', (event) => {
+              d3.select(event.currentTarget).attr('stroke', 'none');
+              tooltip.style('opacity', 0);
+            });
+
+        // Legend
+        const legend = d3.select('#bar-legend')
+          .selectAll('.legend-item')
+          .data(detectionMethods)
+          .enter().append('div').attr('class', 'legend-item');
+
+        legend.append('span')
+          .attr('class', 'legend-color')
+          .style('background-color', d => color(d));
+
+        legend.append('span').text(d => d);
+      }
+
+      // Button Toggle Function
+      function setupDataToggleButtons(data) {
+        const buttons = d3.selectAll('.data-toggle-btn');
+        
+        buttons.on('click', function() {
+          const dimension = this.dataset.dimension;
+          
+          // Update active button
+          buttons.classed('active', false);
+          d3.select(this).classed('active', true);
+          
+          // Redraw bar chart with new dimension
+          drawBarChart(data, dimension);
+        });
+      }
 
       // Reload on resize for responsiveness
       window.addEventListener('resize', () => location.reload());
