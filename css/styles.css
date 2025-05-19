@@ -132,3 +132,25 @@ html, body {
     font-size: 0.85rem;
     margin-top: auto;
   }
+
+/* Fix treemap container height */
+#treemap {
+  width: 800px;
+  height: 800px;
+}
+
+.tooltip {
+  position: absolute;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 1000;
+}
+#treemap text {
+  fill: #ffffff !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}
