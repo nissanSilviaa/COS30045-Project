@@ -3,21 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Positive Drug Tests – Cleveland Dot Plot</title>
+  <title>Positive Drug Tests – Treemap of Positive Tests by State</title>
   <link rel="stylesheet" href="css/styles.css" />
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <style>
-    body {
-      font-family: sans-serif;
-    }
+    body { font-family: sans-serif; }
     .chart-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       max-width: 1000px;
+      width: 100%;
       margin: 3rem auto;
       background: white;
       padding: 2rem;
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: relative;
     }
+    #treemap {
+      width: 100%;
+      height: 700px;
+      display: block;
+    }
+    #treemap svg { width: 100%; height: 100%; }
+    .node { font-size: 12px; pointer-events: none; }
+    .node rect { stroke: #fff; }
+    .node text { pointer-events: none; fill: #fff; font-weight: bold; }
     .tooltip {
       position: absolute;
       background: rgba(0,0,0,0.8);
@@ -28,149 +40,144 @@
       pointer-events: none;
       z-index: 1000;
     }
-    svg {
-      width: 100%;
-      height: 700px;
-    }
-    .legend {
-      font-size: 13px;
-    }
   </style>
 </head>
 <body>
-
-   <header>
+  <header>
     <div class="header-inner">
-      <div class="logo">
-        <img src="images/logo.png" alt="Australian Government"/>
-      </div>
+      <div class="logo"><img src="images/logo.png" alt="Australian Government"/></div>
       <h1>Police Enforcement</h1>
     </div>
     <nav>
       <ul>
-        <li><a href="index.html" data-target="home" class="active">Home</a></li>
-        <!--<li><a href="#" data-target="random-breath-tests">Random breath tests</a></li>!-->
-        <li><a href="drugtests.html" data-target="drug-tests">Drugs on the Road</a></li>
-        <li><a href="mobile-phone.html" data-target="mobile-phone">Mobile phone</a></li>
-        <li><a href="speeding.html" data-target="speeding">Speeding</a></li>
-        <!--<li><a href="seatbelts.html" data-target="seatbelts">Non-wearing seatbelts</a></li>!-->
-        <li><a href="unlicensed_driving.html" data-target="unlicensed-driving">Unlicensed driving</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="drugtests.html" class="active">Drugs on the Road</a></li>
+        <li><a href="mobile-phone.html">Mobile phone</a></li>
+        <li><a href="speeding.html">Speeding</a></li>
+        <li><a href="seatbelts.html">Seatbelts</a></li>
+        <li><a href="unlicensed-driving.html">Unlicensed driving</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-   
     <section class="tab-content active">
-       <h2>Fines from Positive Drug Tests on the Road</h2>
-      <p>Here you can explore trends in fines issued to drugged drivers across Australia, including camera-detected offences.</p>
+      <h2 style="text-align:center;">Treemap of Positive Drug Tests by State (2008–2023)</h2>
       <div class="chart-container">
-  <h3 style="text-align: center; margin-bottom: 1rem;">Drug Offences by Jurisdiction from 2008 to 2023</h3>
-  <div id="dotplot"></div>
-</div>
-
+        <div id="treemap"></div>
+      </div>
     </section>
   </main>
 
-
-   <footer>
+  <footer>
     <p>© 2025 Australian Government Department of Infrastructure, Transport, Regional Development, Communications and the Arts</p>
   </footer>
 
   <script>
-    const margin = {top: 20, right: 40, bottom: 50, left: 150},
-          width = 1000 - margin.left - margin.right,
-          height = 650 - margin.top - margin.bottom;
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = d3.select('#treemap');
+      const width = container.node().offsetWidth;
+      const height = container.node().offsetHeight;
 
-    const svg = d3.select("#dotplot")
-      .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-        .attr("transform", `translate(${margin.left},${margin.top})`);
+      container.selectAll('*').remove();
+      const svg = container.append('svg')
+        .attr('width', width)
+        .attr('height', height);
 
-    const tooltip = d3.select("body")
-      .append("div")
-      .attr("class", "tooltip")
-      .style("opacity", 0);
+      const tooltip = d3.select('body').append('div')
+        .attr('class', 'tooltip')
+        .style('opacity', 0);
 
-    const color = d3.scaleOrdinal(d3.schemeTableau10);
+      d3.csv('database/drug_police_enforcement_2023_positive_drug_tests_2024-09-20.csv').then(data => {
+        data.forEach(d => {
+          d.count = +d['COUNT'].replace(/[^0-9.-]+/g, '') || 0;
+          d.state = d['JURISDICTION'] || 'Unknown';
+        });
 
-    d3.csv("database/drug_police_enforcement_2023_positive_drug_tests_2024-09-20.csv").then(data => {
-      data = data.filter(d => d.METRIC === "positive_drug_tests" && d.JURISDICTION && d.YEAR && d.COUNT);
-      data.forEach(d => {
-        d.YEAR = +d.YEAR;
-        d.COUNT = +d.COUNT;
-      });
+        const testsByState = Array.from(
+          d3.rollup(data, v => d3.sum(v, d => d.count), d => d.state),
+          ([state, total]) => ({ state, total })
+        ).filter(d => d.state);
 
-      // Grouped by jurisdiction
-      const jurisdictions = Array.from(new Set(data.map(d => d.JURISDICTION))).sort();
-      const years = Array.from(new Set(data.map(d => d.YEAR))).sort();
+        const states = testsByState.map(d => d.state);
+        const color = d3.scaleOrdinal()
+          .domain(states)
+          .range(d3.schemeCategory10);
 
-      const x = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.COUNT)]).nice()
-        .range([0, width]);
+        const root = d3.hierarchy({ children: testsByState })
+          .sum(d => d.total)
+          .sort((a, b) => b.value - a.value);
 
-      const y = d3.scaleBand()
-        .domain(jurisdictions)
-        .range([0, height])
-        .padding(0.6);
+        d3.treemap()
+          .size([width, height])
+          .paddingInner(2)(root);
 
-      // Draw axes
-      svg.append("g")
-        .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(x).ticks(6));
+        const nodes = svg.selectAll('g.node')
+          .data(root.leaves())
+          .join('g')
+            .attr('class', 'node')
+            .attr('transform', d => `translate(${d.x0},${d.y0})`);
 
-      svg.append("g")
-        .call(d3.axisLeft(y));
+        nodes.append('rect')
+          .attr('width', d => d.x1 - d.x0)
+          .attr('height', d => d.y1 - d.y0)
+          .attr('fill', d => color(d.data.state));
 
-      // Draw connecting lines
-      jurisdictions.forEach(jurisdiction => {
-        const row = data.filter(d => d.JURISDICTION === jurisdiction);
+        // display state and total inside each box
+        nodes.append('text')
+          .attr('x', 6)
+          .attr('y', 18)
+          .text(d => `${d.data.state}: ${d3.format(',')(d.data.total)}`)
+          .call(wrap, d => d.x1 - d.x0 - 12);
 
-        svg.append("path")
-          .datum(row)
-          .attr("fill", "none")
-          .attr("stroke", "#ccc")
-          .attr("stroke-width", 1)
-          .attr("d", d3.line()
-            .x(d => x(d.COUNT))
-            .y(d => y(d.JURISDICTION) + y.bandwidth() / 2)
-          );
-      });
-
-      // Draw dots
-      svg.selectAll("dot")
-        .data(data)
-        .enter()
-        .append("circle")
-          .attr("cx", d => x(d.COUNT))
-          .attr("cy", d => y(d.JURISDICTION) + y.bandwidth() / 2)
-          .attr("r", 5)
-          .attr("fill", d => color(d.YEAR))
-          .on("mouseover", (event, d) => {
-            tooltip.transition().duration(200).style("opacity", 0.9);
-            tooltip.html(
-              `<strong>${d.JURISDICTION}</strong><br/>
-              Year: ${d.YEAR}<br/>
-              Positive Tests: ${d.COUNT}`
-            )
-            .style("left", (event.pageX + 10) + "px")
-            .style("top", (event.pageY - 30) + "px");
+        nodes.on('mouseover', (event, d) => {
+            d3.select(event.currentTarget).select('rect')
+              .attr('stroke', '#000')
+              .attr('stroke-width', 1.5);
+            tooltip.transition().duration(200).style('opacity', 0.9);
+            tooltip.html(`<strong>${d.data.state}</strong><br/>Positive Tests: ${d3.format(',')(d.value)}`)
+              .style('left', `${event.pageX + 10}px`)
+              .style('top', `${event.pageY - 28}px`);
           })
-          .on("mouseout", () => {
-            tooltip.transition().duration(400).style("opacity", 0);
+          .on('mouseout', (event) => {
+            d3.select(event.currentTarget).select('rect').attr('stroke', null);
+            tooltip.transition().duration(400).style('opacity', 0);
           });
 
-      // Draw legend
-      const legend = svg.append("g")
-        .attr("class", "legend")
-        .attr("transform", `translate(${width - 120}, 0)`);
-
-      years.forEach((year, i) => {
-        const g = legend.append("g").attr("transform", `translate(0, ${i * 20})`);
-        g.append("rect").attr("width", 10).attr("height", 10).attr("fill", color(year));
-        g.append("text").attr("x", 15).attr("y", 10).text(year).attr("alignment-baseline", "middle");
+        // helper: wrap text to fit within box
+        function wrap(textSelection, getWidth) {
+          textSelection.each(function(d) {
+            const text = d3.select(this);
+            const width = getWidth(d);
+            const words = text.text().split(/\s+/).reverse();
+            let word, line = [], lineNumber = 0;
+            const lineHeight = 1.1; // ems
+            const y = text.attr('y');
+            let tspan = text.text(null).append('tspan').attr('x', 6).attr('y', y);
+            while (word = words.pop()) {
+              line.push(word);
+              tspan.text(line.join(' '));
+              if (tspan.node().getComputedTextLength() > width) {
+                line.pop();
+                tspan.text(line.join(' '));
+                line = [word];
+                tspan = text.append('tspan')
+                  .attr('x', 6)
+                  .attr('y', y)
+                  .attr('dy', `${++lineNumber * lineHeight}em`)
+                  .text(word);
+              }
+            }
+          });
+        }
+      }).catch(err => {
+        console.error('Error loading data:', err);
+        svg.append('text')
+          .attr('x', width/2)
+          .attr('y', height/2)
+          .attr('text-anchor','middle')
+          .style('fill','red')
+          .text('Unable to load data.');
       });
     });
   </script>
