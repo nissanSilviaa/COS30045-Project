@@ -155,9 +155,10 @@ html, body {
   font-weight: 700 !important;
 }
 .drugtests-page .chart-box {
-  border: 2px solid #e2e8f0;
+  border: 3px solid #cbd5e1;         
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.5);  
+  overflow: visible;
 }
 
 /* Stack area chart below treemap */
