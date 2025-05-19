@@ -135,7 +135,7 @@ html, body {
 
 /* Fix treemap container height */
 #treemap {
-  width: 800px;
+  width: 1000px;
   height: 800px;
 }
 
@@ -151,6 +151,29 @@ html, body {
 }
 #treemap text {
   fill: #ffffff !important;
-  font-size: 18px !important;
+  font-size: 15px !important;
   font-weight: 700 !important;
 }
+.drugtests-page .chart-box {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  overflow: visible;
+}
+
+/* Stack area chart below treemap */
+.chart-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+#areachart.chart-box {
+  margin-top: 1rem;
+}
+
+/* Ensure text fully visible inside SVG */
+.chart-box svg {
+  overflow: visible;
+}
+
+

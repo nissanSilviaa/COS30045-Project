@@ -25,138 +25,22 @@
     </nav>
   </header>
 
-  <main>
+    <main>
     <section class="tab-content active">
-      <h2 style="text-align:center;">Treemap of Positive Drug Tests by State (2008–2023)</h2>
-      <div class="chart-container">
-        <div id="treemap"></div>
+      <h2 style="text-align:center;">Positive Drug Tests by State</h2>
+      <div class="chart-flex">
+        <div id="areachart" class="chart-box"></div>
+        <div id="treemap"    class="chart-box"></div>
       </div>
     </section>
   </main>
+
 
   <footer>
     <p>© 2025 Australian Government Department of Infrastructure, Transport, Regional Development, Communications and the Arts</p>
   </footer>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const container = d3.select('#treemap');
-      const width = container.node().offsetWidth;
-      const height = container.node().offsetHeight;
-      container.selectAll('*').remove();
-      const svg = container.append('svg').attr('width', width).attr('height', height);
-
-      const tooltip = d3.select('body').append('div')
-        .attr('class', 'tooltip')
-        .style('opacity', 0);
-
-      d3.csv('database/drug_police_enforcement_2023_positive_drug_tests_2024-09-20.csv').then(data => {
-        // parse count, state, age group
-        data.forEach(d => {
-          d.count = +d['COUNT'].replace(/[^0-9.-]+/g, '') || 0;
-          d.state = d['JURISDICTION'] || 'Unknown';
-          d.ageGroup = d['AGE_GROUP'] || 'All ages';
-        });
-
-        // rollup by state and age group
-        const stateAgeMap = d3.rollup(
-          data,
-          v => d3.sum(v, d => d.count),
-          d => d.state,
-          d => d.ageGroup
-        );
-
-        // create array with totals and ageCounts
-        const testsByState = Array.from(stateAgeMap, ([state, ageMap]) => {
-          const ageCounts = Array.from(ageMap, ([age, total]) => ({ age, total }));
-          const total = d3.sum(ageCounts, d => d.total);
-          return { state, total, ageCounts };
-        }).filter(d => d.state);
-
-        // color scale
-        const states = testsByState.map(d => d.state);
-        const color = d3.scaleOrdinal().domain(states).range(d3.schemeCategory10);
-
-        // build treemap hierarchy
-        const root = d3.hierarchy({ children: testsByState })
-          .sum(d => d.total)
-          .sort((a, b) => b.value - a.value);
-
-        d3.treemap().size([width, height]).paddingInner(2)(root);
-
-        // render nodes
-        const nodes = svg.selectAll('g.node')
-          .data(root.leaves())
-          .join('g')
-            .attr('class', 'node')
-            .attr('transform', d => `translate(${d.x0},${d.y0})`);
-
-        nodes.append('rect')
-          .attr('width', d => d.x1 - d.x0)
-          .attr('height', d => d.y1 - d.y0)
-          .attr('fill', d => color(d.data.state));
-
-        nodes.append('text')
-          .attr('x', 6)
-          .attr('y', 18)
-          .text(d => `${d.data.state}: ${d3.format(',')(d.data.total)}`)
-          .call(wrap);
-
-        // hover: show age breakdown
-        nodes
-          .on('mouseover', (event, d) => {
-            d3.select(event.currentTarget).select('rect')
-              .attr('stroke', '#000').attr('stroke-width', 2);
-            tooltip.transition().duration(200).style('opacity', 0.9);
-            let html = `<strong>${d.data.state}</strong><br/>Total Tests: ${d3.format(',')(d.value)}<br/><em>By Age Group:</em><ul>`;
-            d.data.ageCounts.forEach(a => {
-              html += `<li>${a.age}: ${d3.format(',')(a.total)}</li>`;
-            });
-            html += '</ul>';
-            tooltip.html(html)
-              .style('left', `${event.pageX + 10}px`)
-              .style('top', `${event.pageY - 28}px`);
-          })
-          .on('mouseout', (event) => {
-            d3.select(event.currentTarget).select('rect').attr('stroke', null);
-            tooltip.transition().duration(400).style('opacity', 0);
-          });
-
-        // wrap helper
-        function wrap(text) {
-          text.each(function(d) {
-            const textEl = d3.select(this);
-            const width = d.x1 - d.x0 - 12;
-            const words = textEl.text().split(/\s+/).reverse();
-            let line = [], lineNumber = 0;
-            const lineHeight = 1.1;
-            const y = textEl.attr('y');
-            let tspan = textEl.text(null).append('tspan').attr('x', 6).attr('y', y);
-            let word;
-            while (word = words.pop()) {
-              line.push(word);
-              tspan.text(line.join(' '));
-              if (tspan.node().getComputedTextLength() > width) {
-                line.pop();
-                tspan.text(line.join(' '));
-                line = [word];
-                tspan = textEl.append('tspan')
-                  .attr('x', 6).attr('y', y)
-                  .attr('dy', `${++lineNumber * lineHeight}em`)
-                  .text(word);
-              }
-            }
-          });
-        }
-
-      }).catch(err => {
-        console.error('Error loading data:', err);
-        svg.append('text')
-          .attr('x', width/2).attr('y', height/2)
-          .attr('text-anchor','middle').style('fill','red')
-          .text('Unable to load data.');
-      });
-    });
-  </script>
+  <script src="js/drugtests/treemap.js" defer></script>
+  <script src="js/drugtests/areachart.js" defer></script>
 </body>
 </html>
