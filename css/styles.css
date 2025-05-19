@@ -170,6 +170,10 @@ html, body {
 #areachart.chart-box {
   margin-top: 1rem;
 }
+#areachart {
+  width: 1000px;
+  height: 800px;
+}
 
 /* Ensure text fully visible inside SVG */
 .chart-box svg {
