@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const row = { year };
         states.forEach(state => {
           const sumVal = d3.sum(data.filter(d => d.year === year && d.state === state), d => d.count);
-          row[state] = sumVal;  // always assign, even if 0
+          row[state] = sumVal || 0;  // always assign, even if 0
         });
         return row;
       });
