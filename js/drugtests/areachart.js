@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const width = fullWidth - margin.left - margin.right;
   const height = fullHeight - margin.top - margin.bottom;
 
-  // Clear container and setup SVG
+  // Clear previous content and create SVG
   container.selectAll('*').remove();
   const svg = container.append('svg')
     .attr('width', fullWidth)
@@ -55,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
       totalsByState.sort((a,b) => b.total - a.total);
       const orderedStates = totalsByState.slice().reverse().map(d => d.state);
 
-      // Stack layout
       const stack = d3.stack().keys(orderedStates);
       const series = stack(table);
 
@@ -65,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .domain([0, d3.max(series, s => d3.max(s, d => d[1]))]).nice()
         .range([height, 0]);
 
-      // Color scale
       const color = d3.scaleOrdinal(d3.schemeCategory10).domain(orderedStates);
 
       // Area generator
@@ -82,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
           .attr('d', areaGen)
           .attr('fill', d => color(d.key))
           .on('mouseover', (event, d) => {
-            // roll-up ageGroups for this state
+            // roll-up ageGroups for this state.
             const ageMap = d3.rollup(
               records.filter(r => r.state === d.key),
               v => d3.sum(v, r => r.count),
@@ -115,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .attr('x', -height/2).attr('y', -margin.left + 15)
         .attr('text-anchor','middle').text('Positive Tests');
 
-      // Legend on left
+      // Legend 
       const legend = svg.append('g')
         .attr('transform', `translate(${-margin.left + 20},0)`);
       totalsByState.forEach((d, i) => {
