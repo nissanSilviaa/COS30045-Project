@@ -132,3 +132,52 @@ html, body {
     font-size: 0.85rem;
     margin-top: auto;
   }
+
+/* Fix treemap container height */
+#treemap {
+  width: 1000px;
+  height: 800px;
+}
+
+.tooltip {
+  position: absolute;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 1000;
+}
+#treemap text {
+  fill: #ffffff !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+}
+.drugtests-page .chart-box {
+  border: 3px solid #cbd5e1;         
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.5);  
+  overflow: visible;
+}
+
+/* Stack area chart below treemap */
+.chart-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+#areachart.chart-box {
+  margin-top: 1rem;
+}
+#areachart {
+  width: 1000px;
+  height: 800px;
+}
+
+/* Ensure text fully visible inside SVG */
+.chart-box svg {
+  overflow: visible;
+}
+
+
