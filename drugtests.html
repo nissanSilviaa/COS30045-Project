@@ -19,7 +19,7 @@
         <li><a href="drugtests.html" class="active">Drugs on the Road</a></li>
         <li><a href="mobile-phone.html">Mobile phone</a></li>
         <li><a href="speeding.html">Speeding</a></li>
-        <li><a href="unlicensed_driving.html">Unlicensed driving</a></li>
+        <li><a href="unlicensed-driving.html">Unlicensed driving</a></li>
       </ul>
     </nav>
   </header>
@@ -38,12 +38,22 @@
         <div id="areachart" class="chart-box"></div>
 
       </div>
+    </section>
+    <section class="tab-content active">
+      <h2 style="text-align:center;">Positive Drug Tests by Age Groups (2008-2023)</h2>
+      <div class="chart-flex">
+        <div id="boxplot" class="chart-box"></div>
 
+      </div>
+    </section>
+
+     <section class="tab-content active"> <!-- delete once maisha copies code to another catagory -->
       <div class="chart-container">
         <h3 style="text-align: center; margin-bottom: 1rem;">Drug Offences by Jurisdiction from 2008 to 2023</h3>
       <div id="dotplot"></div>
       </div>
     </section>
+  
   </main>
 
 
@@ -53,7 +63,9 @@
 
   <script src="js/drugtests/treemap.js" defer></script>
   <script src="js/drugtests/areachart.js" defer></script>
-  <script>
+  <script src="js/drugtests/boxplot.js" defer></script>
+
+  <script> <!-- delete once maisha copies code to another catagory -->
     const margin = {top: 20, right: 40, bottom: 50, left: 150},
           width = 1000 - margin.left - margin.right,
           height = 650 - margin.top - margin.bottom;
