@@ -138,6 +138,10 @@ html, body {
   width: 1000px;
   height: 800px;
 }
+#boxplot {
+  width: 1000px;
+  height: 800px;
+}
 
 .tooltip {
   position: absolute;
