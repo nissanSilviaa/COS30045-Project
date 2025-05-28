@@ -25,6 +25,20 @@
       pointer-events: none;
       z-index: 999;
     }
+    .axis-text {
+      font-size: 12px;
+      fill: #333;
+      font-weight: 500;
+    }
+    .title-text {
+      font-size: 18px;
+      fill: #222;
+      font-weight: bold;
+    }
+    .legend-text {
+      font-size: 12px;
+      fill: #333;
+    }
   </style>
 </head>
 <body>
@@ -37,13 +51,11 @@
     </div>
     <nav>
       <ul>
-        <li><a href="index.html" data-target="home" class="active">Home</a></li>
-        <!--<li><a href="#" data-target="random-breath-tests">Random breath tests</a></li>-->
-        <li><a href="drugtests.html" data-target="drug-tests">Drugs on the Road</a></li>
-        <li><a href="mobile-phone.html" data-target="mobile-phone">Mobile phone</a></li>
-        <li><a href="#" data-target="speeding">Speeding</a></li>
-        <!--<li><a href="seatbelts.html" data-target="seatbelts">Non-wearing seatbelts</a></li>-->
-        <li><a href="unlicensed_driving.html" data-target="unlicensed-driving">Unlicensed driving</a></li>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="drugtests.html">Drugs on the Road</a></li>
+        <li><a href="mobile-phone.html">Mobile phone</a></li>
+        <li><a href="#">Speeding</a></li>
+        <li><a href="unlicensed_driving.html">Unlicensed driving</a></li>
       </ul>
     </nav>
   </header>
@@ -51,7 +63,7 @@
   <main>
     <section class="tab-content active">
       <h2>Speeding Fines</h2>
-      <p>Here you can explore trends in speeding fines issued across Australia, including camera-detected offences.</p>
+      <p>Explore trends in speeding fines issued across Australia, including camera-detected offences.</p>
       <div id="chart-speeding" class="chart-container"></div>
     </section>
   </main>
@@ -62,16 +74,20 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      const margin = { top: 80, right: 20, bottom: 60, left: 100 };
+      const margin = { top: 80, right: 20, bottom: 80, left: 120 };
       const width = 800 - margin.left - margin.right;
       const height = 500 - margin.top - margin.bottom;
 
       const svg = d3.select("#chart-speeding")
         .append("svg")
         .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("height", height + margin.top + margin.bottom + 80)
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
+
+      const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 
       d3.csv("database/speeding.csv").then(data => {
         data.forEach(d => d.FINES = +d.FINES || 0);
@@ -95,24 +111,8 @@
 
         const x = d3.scaleBand().domain(ageGroups).range([0, width]).padding(0.05);
         const y = d3.scaleBand().domain(jurisdictions).range([0, height]).padding(0.05);
-        const color = d3.scaleSequential()
-          .interpolator(d3.interpolateYlOrRd)
-          .domain([0, d3.max(heatData, d => d.fines)]);
-
-        svg.append("g")
-          .attr("transform", `translate(0,${height})`)
-          .call(d3.axisBottom(x))
-          .selectAll("text")
-          .style("font-size", "12px");
-
-        svg.append("g")
-          .call(d3.axisLeft(y))
-          .selectAll("text")
-          .style("font-size", "12px");
-
-        const tooltip = d3.select("body").append("div")
-          .attr("class", "tooltip")
-          .style("opacity", 0);
+        const maxFines = d3.max(heatData, d => d.fines);
+        const color = d3.scaleSequential().interpolator(d3.interpolateYlOrRd).domain([0, maxFines]);
 
         svg.selectAll()
           .data(heatData, d => d.jurisdiction + ':' + d.age)
@@ -126,7 +126,7 @@
           .style("stroke", "#fff")
           .on("mouseover", function (event, d) {
             tooltip.transition().duration(200).style("opacity", .9);
-            tooltip.html(`<strong>${d.jurisdiction}</strong><br/>Age ${d.age}<br/>Fines: ${d.fines}`)
+            tooltip.html(`<strong>${d.jurisdiction}</strong><br/>Age ${d.age}<br/>Fines: ${d3.format(",")(d.fines)}`)
               .style("left", (event.pageX + 15) + "px")
               .style("top", (event.pageY - 30) + "px");
             d3.select(this).style("stroke", "#000");
@@ -136,28 +136,81 @@
             d3.select(this).style("stroke", "#fff");
           });
 
+        svg.append("g")
+          .attr("transform", `translate(0,${height})`)
+          .call(d3.axisBottom(x))
+          .selectAll("text")
+          .attr("class", "axis-text");
+
+        svg.append("g")
+          .call(d3.axisLeft(y))
+          .selectAll("text")
+          .attr("class", "axis-text");
+
         svg.append("text")
           .attr("x", width / 2)
           .attr("y", -40)
+          .attr("class", "title-text")
           .attr("text-anchor", "middle")
-          .style("font-size", "18px")
-          .style("font-weight", "bold")
           .text("Speeding Fines Heatmap: Jurisdiction vs Age Group");
 
         svg.append("text")
           .attr("x", width / 2)
           .attr("y", height + 50)
+          .attr("class", "axis-text")
           .attr("text-anchor", "middle")
-          .style("font-size", "13px")
           .text("Age Group");
 
         svg.append("text")
           .attr("transform", "rotate(-90)")
           .attr("x", -height / 2)
-          .attr("y", -60)
+          .attr("y", -80)
+          .attr("class", "axis-text")
           .attr("text-anchor", "middle")
-          .style("font-size", "13px")
           .text("Jurisdiction");
+
+        const legendWidth = 300;
+        const legendHeight = 20;
+        const legendMargin = { top: height + 70, left: (width - legendWidth) / 2 };
+
+        const legendSvg = svg.append("g")
+          .attr("transform", `translate(${legendMargin.left},${legendMargin.top})`);
+
+        const defs = svg.append("defs");
+        const gradient = defs.append("linearGradient")
+          .attr("id", "legend-gradient")
+          .attr("x1", "0%").attr("x2", "100%")
+          .attr("y1", "0%").attr("y2", "0%");
+
+        gradient.selectAll("stop")
+          .data(color.range())
+          .enter().append("stop")
+          .attr("offset", (d, i) => i / (color.range().length - 1))
+          .attr("stop-color", d => d);
+
+        legendSvg.append("rect")
+          .attr("width", legendWidth)
+          .attr("height", legendHeight)
+          .style("fill", "url(#legend-gradient)")
+          .style("stroke", "#999");
+
+        legendSvg.append("text")
+          .attr("x", 0)
+          .attr("y", -10)
+          .attr("class", "legend-text")
+          .text("Number of Fines");
+
+        const legendScale = d3.scaleLinear()
+          .domain([0, maxFines])
+          .range([0, legendWidth]);
+
+        const legendAxis = d3.axisBottom(legendScale).ticks(5).tickFormat(d3.format(","));
+
+        legendSvg.append("g")
+          .attr("transform", `translate(0,${legendHeight})`)
+          .call(legendAxis)
+          .selectAll("text")
+          .attr("class", "legend-text");
       });
     });
   </script>
